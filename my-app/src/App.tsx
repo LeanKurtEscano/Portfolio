@@ -1,27 +1,36 @@
-import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './layouts/Navbar';
+import Hero from './sections/Hero';
+import Skills from './sections/Skills';
+import About from './sections/About';
+import Projects from './sections/Projects';
+import ProjectDetails from './sections/ProjectDetails';
 
-import './App.css'
-import Navbar from './layouts/Navbar'
-import Hero from './sections/Hero'
-import Skills from './sections/Skills'
-import About from './sections/About'
-import ProjectsSection from './sections/ProjectsSection'
-import ProjectDetailPage from './sections/ProjectDetailPage'
-
+import './App.css';
+import WorkExperience from './sections/WorkExperience';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <Navbar/>
-    <Hero/>
-     <About/>
-    <Skills/>
+   <>
+  <Navbar />
+  <Routes>
+    <Route
+      path="/"
+      element={
+        <>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <WorkExperience/>
+        </>
+      }
+    />
+    <Route path="/project/:id" element={<ProjectDetails />} />
+  </Routes>
+</>
 
-    
-    </>
-  )
+  );
 }
 
-export default App
+export default App;
