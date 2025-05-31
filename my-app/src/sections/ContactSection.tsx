@@ -132,7 +132,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-gray-900 overflow-hidden">
+    <section id = "contact" className="relative min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-gray-900 overflow-hidden">
       {/* Three.js Background */}
       <canvas
         ref={canvasRef}
