@@ -8,6 +8,9 @@ import ProjectDetails from './sections/ProjectDetails';
 
 import './App.css';
 import WorkExperience from './sections/WorkExperience';
+import Certifications from './sections/Certifications';
+import { Contact } from 'lucide-react';
+import ContactSection from './sections/ContactSection';
 
 function App() {
   return (
@@ -23,6 +26,8 @@ function App() {
           <Skills />
           <Projects />
           <WorkExperience/>
+          <Certifications/>
+           <ContactSection/>
         </>
       }
     />
