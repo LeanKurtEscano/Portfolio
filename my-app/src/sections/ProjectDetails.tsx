@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Github, ExternalLink, Calendar, Tag, CheckCircle, Lightbulb, Target } from 'lucide-react';
-
-import { projectsData } from './Projects';
+import { projectsData } from '../constants';
 
 const ProjectDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();

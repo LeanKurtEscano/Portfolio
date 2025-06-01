@@ -92,7 +92,7 @@ const WorkExperience: React.FC = () => {
   }, []);
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900 py-20 px-4 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-purple-900 py-20 px-4 relative overflow-hidden">
      
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 border border-purple-500 rotate-45"></div>

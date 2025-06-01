@@ -40,8 +40,8 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <div className="relative">
-              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                Portfolio
+              <div className="text-2xl pl-28 font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <p>{"<Lean />"}</p>
               </div>
               <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
             </div>
