@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { ExternalLink, Github } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { projectsData } from '../constants'; 
-
+import { useNavigate } from 'react-router-dom';
 import useParticles from '../hooks/useParticles';
 // Mock project data for demonstration
 
@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
   const animationIdRef = useRef<number | null>(null);
   const [isInView, setIsInView] = useState(false);
   const canvasRef = useParticles();
-
+  const nav = useNavigate();
    const handleNavClick = (item, e) => {
     e.preventDefault();
     const sectionId = item.toLowerCase();
@@ -35,7 +35,8 @@ const Projects: React.FC = () => {
   
   };
   const handleProjectClick = (projectId: number) => {
-    console.log(`Navigate to project ${projectId}`);
+    nav(`/project/${projectId}`);
+  
   };
 
   useEffect(() => {

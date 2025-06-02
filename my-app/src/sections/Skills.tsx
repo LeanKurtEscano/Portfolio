@@ -5,7 +5,7 @@ import { Code, Layers, Settings, Brain, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { programmingLanguages, toolsPlatforms, aitools, frameworksLibraries } from '../constants/skills';
-import { faCode, faCubes, faBrain, faToolbox,  } from '@fortawesome/free-solid-svg-icons';
+import { faCode, faCubes, faBrain, faToolbox, } from '@fortawesome/free-solid-svg-icons';
 const Skills = () => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
@@ -194,8 +194,8 @@ const Skills = () => {
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundImage: category.color.includes('purple') ? 'linear-gradient(to right, #a855f7, #ec4899)' :
-                                      category.color.includes('cyan') ? 'linear-gradient(to right, #06b6d4, #3b82f6)' :
-                                      'linear-gradient(to right, #10b981, #14b8a6)'
+                        category.color.includes('cyan') ? 'linear-gradient(to right, #06b6d4, #3b82f6)' :
+                          'linear-gradient(to right, #10b981, #14b8a6)'
                     }} />
                   </div>
                   <h3 className="text-2xl font-bold text-white">{category.title}</h3>
@@ -246,28 +246,45 @@ const Skills = () => {
         </div>
 
         {/* Skills Summary */}
-        <div className="mt-20 text-center">
-          <div className="inline-flex items-center gap-8 p-6 rounded-2xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 backdrop-blur-sm">
-            <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+        <div className="mt-8 xs:mt-10 sm:mt-12 md:mt-16 lg:mt-20 text-center px-3 xs:px-4 sm:px-6">
+          <div className="inline-flex flex-col xs:flex-col sm:flex-row items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8 p-3 xs:p-4 sm:p-6 rounded-xl xs:rounded-2xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 backdrop-blur-sm max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full">
+
+            {/* Technologies Count */}
+            <div className="text-center flex-1 min-w-0 w-full xs:w-auto">
+              <div className="text-lg xs:text-xl sm:text-2xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 {programmingLanguages.length + frameworksLibraries.length + toolsPlatforms.length}+
               </div>
-              <div className="text-gray-400 text-sm">Technologies</div>
+              <div className="text-gray-400 text-xs xs:text-xs sm:text-sm md:text-sm">
+                Technologies
+              </div>
             </div>
-            <div className="w-px h-12 bg-gray-600"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+
+            {/* Separator */}
+            <div className="w-8 xs:w-12 sm:w-px h-px xs:h-px sm:h-6 md:h-8 lg:h-12 bg-gray-600"></div>
+
+            {/* AI/ML Integration */}
+            <div className="text-center flex-1 min-w-0 w-full xs:w-auto">
+              <div className="text-lg xs:text-xl sm:text-2xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 AI/ML
               </div>
-              <div className="text-gray-400 text-sm">Integration</div>
+              <div className="text-gray-400 text-xs xs:text-xs sm:text-sm md:text-sm">
+                Integration
+              </div>
             </div>
-            <div className="w-px h-12 bg-gray-600"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+
+            {/* Separator */}
+            <div className="w-8 xs:w-12 sm:w-px h-px xs:h-px sm:h-6 md:h-8 lg:h-12 bg-gray-600"></div>
+
+            {/* Full-Stack Development */}
+            <div className="text-center flex-1 min-w-0 w-full xs:w-auto">
+              <div className="text-lg xs:text-xl sm:text-2xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 Full-Stack
               </div>
-              <div className="text-gray-400 text-sm">Development</div>
+              <div className="text-gray-400 text-xs xs:text-xs sm:text-sm md:text-sm">
+                Development
+              </div>
             </div>
+
           </div>
         </div>
       </div>

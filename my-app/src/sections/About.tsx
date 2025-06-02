@@ -7,6 +7,24 @@ const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
+
+  const handleNavClick = (item, e) => {
+    e.preventDefault();
+    const sectionId = item.toLowerCase();
+    const element = document.getElementById(sectionId);
+
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+
+  }
   const highlights = [
     {
       icon: Code,
@@ -54,8 +72,8 @@ const About = () => {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.9,
       y: 30
     },
@@ -93,8 +111,8 @@ const About = () => {
   };
 
   const buttonVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.9,
       y: 20
     },
@@ -147,7 +165,7 @@ const About = () => {
         }}></div>
       </div>
 
-      <motion.div 
+      <motion.div
         className="relative z-10 max-w-7xl mx-auto w-full"
         variants={containerVariants}
         initial="hidden"
@@ -155,7 +173,7 @@ const About = () => {
       >
         {/* Section Header */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
-          <motion.div 
+          <motion.div
             className="inline-block mb-6 relative"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
@@ -171,13 +189,13 @@ const About = () => {
               About Me
             </span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           >
-            <motion.span 
+            <motion.span
               className="block bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent"
               variants={textRevealVariants}
               custom={0}
@@ -186,7 +204,7 @@ const About = () => {
             >
               Crafting Intelligent
             </motion.span>
-            <motion.span 
+            <motion.span
               className="block bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent"
               variants={textRevealVariants}
               custom={1}
@@ -196,8 +214,8 @@ const About = () => {
               Web Experiences
             </motion.span>
           </motion.h2>
-          
-          <motion.div 
+
+          <motion.div
             className="w-32 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={isInView ? { width: 128, opacity: 1 } : { width: 0, opacity: 0 }}
@@ -208,72 +226,72 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           {/* Content */}
           <motion.div className="space-y-8" variants={itemVariants}>
-            <motion.div 
+            <motion.div
               className="space-y-6 text-gray-300 text-lg leading-relaxed"
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              <motion.p 
+              <motion.p
                 variants={textRevealVariants}
                 custom={2}
                 className="overflow-hidden"
               >
-                I'm a passionate full-stack developer specializing in bridging traditional web development 
-                and cutting-edge AI technologies. I create intelligent 
+                I'm a passionate full-stack developer specializing in bridging traditional web development
+                and cutting-edge AI technologies. I create intelligent
                 applications that understand and interact meaningfully.
               </motion.p>
-              
-              <motion.p 
+
+              <motion.p
                 variants={textRevealVariants}
                 custom={3}
                 className="overflow-hidden"
               >
-              My journey began with traditional web development, but I quickly became fascinated by the potential of AI integration. With a strong focus on backend development, I have developed a keen interest in Retrieval-Augmented Generation (RAG) and autonomous agents, exploring how these technologies can transform traditional applications into smart, context-aware systems.
+                My journey began with traditional web development, but I quickly became fascinated by the potential of AI integration. With a strong focus on backend development, I have developed a keen interest in Retrieval-Augmented Generation (RAG) and autonomous agents, exploring how these technologies can transform traditional applications into smart, context-aware systems.
               </motion.p>
 
-              <motion.p 
+              <motion.p
                 variants={textRevealVariants}
                 custom={4}
                 className="overflow-hidden"
               >
-               Whether building efficient web applications, integrating AI-powered retrieval agents, or creating intelligent automation workflows, I enjoy solving complex challenges that combine backend development and AI.
+                Whether building efficient web applications, integrating AI-powered retrieval agents, or creating intelligent automation workflows, I enjoy solving complex challenges that combine backend development and AI.
 
 
               </motion.p>
             </motion.div>
 
             {/* Stats */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-700"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               {[
-                { number: "50+", label: "Projects" },
-                { number: "3+", label: "Years Exp" },
-                { number: "15+", label: "AI Apps" }
+                { number: "<24h", label: "Response Time" },
+                { number: "4", label: "Projects Completed" },
+                { number: "100%", label: "On-Time Delivery" }
               ].map((stat, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="text-center group cursor-pointer"
                   initial={{ opacity: 0, scale: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0, y: 20 }}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     delay: 0.8 + index * 0.1,
                     ease: [0.25, 0.25, 0.25, 0.75]
                   }}
-                  whileHover={{ 
-                    scale: 1.1, 
+                  whileHover={{
+                    scale: 1.1,
                     y: -5,
                     transition: { duration: 0.3 }
                   }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2"
-                    whileHover={{ 
+                    whileHover={{
                       backgroundImage: "linear-gradient(to right, #a855f7, #06b6d4, #f59e0b)",
                       transition: { duration: 0.3 }
                     }}
@@ -287,7 +305,7 @@ const About = () => {
           </motion.div>
 
           {/* Highlights Grid */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 gap-6"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -308,22 +326,22 @@ const About = () => {
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-cyan-500/0 to-purple-500/0 rounded-2xl"
                   initial={{ opacity: 0, scale: 0.8 }}
-                  whileHover={{ 
-                    opacity: 0.1, 
+                  whileHover={{
+                    opacity: 0.1,
                     scale: 1.05,
                     backgroundImage: "linear-gradient(45deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1))"
                   }}
                   transition={{ duration: 0.5 }}
                 />
-                
-                <motion.div 
+
+                <motion.div
                   className="mb-4 relative"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.1
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-cyan-500/30 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-purple-500/20"
                     whileHover={{
                       boxShadow: "0 0 25px rgba(139, 92, 246, 0.4), 0 0 50px rgba(6, 182, 212, 0.2)"
@@ -332,8 +350,8 @@ const About = () => {
                     <item.icon className="w-6 h-6 text-purple-400 group-hover:text-purple-300 transition-colors duration-300" />
                   </motion.div>
                 </motion.div>
-                
-                <motion.h3 
+
+                <motion.h3
                   className="text-xl font-semibold text-white mb-3 group-hover:text-purple-200 transition-colors duration-300"
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -341,8 +359,8 @@ const About = () => {
                 >
                   {item.title}
                 </motion.h3>
-                
-                <motion.p 
+
+                <motion.p
                   className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 leading-relaxed"
                   initial={{ opacity: 0, y: 15 }}
                   animate={isInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 15 }}
@@ -366,18 +384,19 @@ const About = () => {
         </div>
 
         {/* Call to Action */}
-        <motion.div 
+        <motion.div
           className="text-center mt-20"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         >
-          <motion.div 
+          <motion.div
             className="inline-flex items-center gap-6 flex-wrap justify-center"
           >
-            <motion.button 
-              className="relative px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-xl font-semibold text-white shadow-lg overflow-hidden group"
+            <motion.button
+              className="relative px-8 py-4 cursor-pointer bg-gradient-to-r from-purple-600 to-cyan-600 rounded-xl font-semibold text-white shadow-lg overflow-hidden group"
               variants={buttonVariants}
               custom={0}
+              onClick={(e) => handleNavClick("contact", e)}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               whileHover="hover"
@@ -391,7 +410,7 @@ const About = () => {
               />
               <motion.div
                 className="absolute inset-0 bg-white/20 rounded-xl opacity-0"
-                whileHover={{ 
+                whileHover={{
                   opacity: [0, 0.2, 0],
                   scale: [1, 1.05, 1]
                 }}
@@ -402,8 +421,8 @@ const About = () => {
                 className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-xl blur opacity-30 group-hover:opacity-50"
               />
             </motion.button>
-            
-            <motion.button 
+
+            <motion.button
               className="relative px-8 py-4 border-2 border-purple-500/50 text-white rounded-xl font-semibold group overflow-hidden"
               variants={buttonVariants}
               custom={1}
@@ -420,7 +439,7 @@ const About = () => {
               />
               <motion.div
                 className="absolute inset-0 border-2 border-purple-400/0 rounded-xl"
-                whileHover={{ 
+                whileHover={{
                   borderColor: "rgba(168, 85, 247, 0.8)",
                   boxShadow: "0 0 20px rgba(168, 85, 247, 0.3)"
                 }}
