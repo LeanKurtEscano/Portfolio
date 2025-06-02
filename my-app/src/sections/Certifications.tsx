@@ -1,152 +1,24 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Award, Calendar, ExternalLink } from 'lucide-react';
-
+import { certifications } from '../constants/certification';
+import useParticles from '../hooks/useParticles';
 const Certifications = () => {
   const mountRef = useRef(null);
-
-  useEffect(() => {
-    if (!mountRef.current) return;
-
+  const canvasRef = useParticles();
+  
  
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
-    mountRef.current.appendChild(renderer.domElement);
-
-    // Create floating geometric shapes
-    const geometries = [
-      new THREE.OctahedronGeometry(0.5),
-      new THREE.TetrahedronGeometry(0.6),
-      new THREE.IcosahedronGeometry(0.4)
-    ];
-
-    const materials = [
-      new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true, opacity: 0.3, transparent: true }),
-      new THREE.MeshBasicMaterial({ color: 0x06b6d4, wireframe: true, opacity: 0.4, transparent: true }),
-      new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, opacity: 0.2, transparent: true })
-    ];
-
-    const meshes = [];
-    for (let i = 0; i < 8; i++) {
-      const geometry = geometries[i % geometries.length];
-      const material = materials[i % materials.length];
-      const mesh = new THREE.Mesh(geometry, material);
-      
-      mesh.position.set(
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 10
-      );
-      
-      mesh.rotation.set(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI,
-        Math.random() * Math.PI
-      );
-      
-      scene.add(mesh);
-      meshes.push(mesh);
-    }
-
-    camera.position.z = 5;
-
-    // Animation loop
-    const animate = () => {
-      requestAnimationFrame(animate);
-      
-      meshes.forEach((mesh, index) => {
-        mesh.rotation.x += 0.005 + index * 0.001;
-        mesh.rotation.y += 0.003 + index * 0.0005;
-        mesh.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
-      });
-      
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    // Handle resize
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
-  }, []);
-
-  const certifications = [
-    {
-      id: 1,
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2024",
-      image: "https://via.placeholder.com/300x200/1f2937/8b5cf6?text=AWS+Certified",
-      credentialId: "AWS-CSA-2024-001",
-      verifyUrl: "#"
-    },
-    {
-      id: 2,
-      title: "Google Cloud Professional Developer",
-      issuer: "Google Cloud",
-      date: "2023",
-      image: "https://via.placeholder.com/300x200/1f2937/06b6d4?text=GCP+Developer",
-      credentialId: "GCP-PD-2023-002",
-      verifyUrl: "#"
-    },
-    {
-      id: 3,
-      title: "Microsoft Azure AI Engineer",
-      issuer: "Microsoft",
-      date: "2023",
-      image: "https://via.placeholder.com/300x200/1f2937/10b981?text=Azure+AI",
-      credentialId: "AZ-102-2023-003",
-      verifyUrl: "#"
-    },
-    {
-      id: 4,
-      title: "Kubernetes Certified Developer",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2024",
-      image: "https://via.placeholder.com/300x200/1f2937/f59e0b?text=K8s+Developer",
-      credentialId: "CKAD-2024-004",
-      verifyUrl: "#"
-    },
-    {
-      id: 5,
-      title: "TensorFlow Developer Certificate",
-      issuer: "TensorFlow",
-      date: "2023",
-      image: "https://via.placeholder.com/300x200/1f2937/ef4444?text=TF+Developer",
-      credentialId: "TF-DEV-2023-005",
-      verifyUrl: "#"
-    },
-    {
-      id: 6,
-      title: "React Advanced Patterns",
-      issuer: "Meta",
-      date: "2024",
-      image: "https://via.placeholder.com/300x200/1f2937/8b5cf6?text=React+Advanced",
-      credentialId: "META-REACT-2024-006",
-      verifyUrl: "#"
-    }
-  ];
-
+ 
   return (
     <div id = "certifications" className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 relative overflow-hidden">
       {/* Three.js Background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
+      
+
       <div ref={mountRef} className="absolute inset-0 pointer-events-none" />
       
       {/* Content */}
@@ -229,22 +101,7 @@ const Certifications = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
-            <div className="text-4xl font-bold text-purple-400 mb-2">15+</div>
-            <div className="text-gray-300">Professional Certifications</div>
-          </div>
-          
-          <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300">
-            <div className="text-4xl font-bold text-cyan-400 mb-2">500+</div>
-            <div className="text-gray-300">Hours of Training</div>
-          </div>
-          
-          <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-green-500/50 transition-all duration-300">
-            <div className="text-4xl font-bold text-green-400 mb-2">100%</div>
-            <div className="text-gray-300">Pass Rate</div>
-          </div>
-        </div>
+    
       </div>
 
       <style jsx>{`

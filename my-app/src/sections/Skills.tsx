@@ -1,9 +1,11 @@
 
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
-import { Code, Layers, Settings } from 'lucide-react';
+import { Code, Layers, Settings, Brain, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { programmingLanguages, toolsPlatforms, aitools, frameworksLibraries } from '../constants/skills';
+import { faCode, faCubes, faBrain, faToolbox,  } from '@fortawesome/free-solid-svg-icons';
 const Skills = () => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
@@ -103,7 +105,7 @@ const Skills = () => {
   }, []);
 
   // Default data arrays for each category
- 
+
 
   const skillCategories = [
     {
@@ -122,14 +124,14 @@ const Skills = () => {
     },
     {
       title: 'AI Tools & Platforms',
-      icon: Layers,
+      icon: Brain,
       skills: aitools,
       color: 'from-cyan-500 to-blue-500',
       bgColor: 'from-cyan-500/10 to-blue-500/10'
     },
     {
       title: 'Tools & Platforms',
-      icon: Settings,
+      icon: Wrench,
       skills: toolsPlatforms,
       color: 'from-green-500 to-teal-500',
       bgColor: 'from-green-500/10 to-teal-500/10'
@@ -188,7 +190,13 @@ const Skills = () => {
               <div className="text-center">
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 backdrop-blur-sm">
                   <div className={`p-2 rounded-lg bg-gradient-to-r ${category.bgColor}`}>
-                    <category.icon className={`w-6 h-6 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`} />
+                    <category.icon className={`w-6 h-6 text-transparent bg-gradient-to-r ${category.color} bg-clip-text`} style={{
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundImage: category.color.includes('purple') ? 'linear-gradient(to right, #a855f7, #ec4899)' :
+                                      category.color.includes('cyan') ? 'linear-gradient(to right, #06b6d4, #3b82f6)' :
+                                      'linear-gradient(to right, #10b981, #14b8a6)'
+                    }} />
                   </div>
                   <h3 className="text-2xl font-bold text-white">{category.title}</h3>
                 </div>
@@ -210,7 +218,7 @@ const Skills = () => {
                       <div className="relative p-6 rounded-2xl bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/50 backdrop-blur-md hover:border-purple-500/50 transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-purple-500/20">
                         {/* Skill Icon */}
                         <div className="text-center space-y-4">
-                          <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-to-br from-gray-700/50 to-gray-800/50 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300 group-hover:rotate-6">
+                          <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-to-br from-slate-700/50 to-purple-700/60 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300 group-hover:rotate-6 border border-blue-400/15">
                             <img
                               src={skill.image}
                               alt={skill.name}

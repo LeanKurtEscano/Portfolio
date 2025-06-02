@@ -1,75 +1,101 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Calendar, MapPin, ExternalLink } from 'lucide-react';
-
-interface Experience {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  duration: string;
-  description: string[];
-  technologies: string[];
-  achievements?: string[];
-}
+import { experiences } from '../constants/experience';
+import * as THREE from 'three';
 
 const WorkExperience: React.FC = () => {
   const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
   const timelineRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const canvasRef = useRef(null);
+  const sceneRef = useRef(null);
 
-  const experiences: Experience[] = [
-    {
-      id: 1,
-      title: "Senior Full Stack Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      duration: "2022 - Present",
-      description: [
-        "Led development of AI-powered web applications using RAG architecture",
-        "Implemented LangChain workflows for intelligent document processing",
-        "Built scalable microservices handling 1M+ daily requests"
-      ],
-      technologies: ["React", "Node.js", "Python", "LangChain", "PostgreSQL", "Docker"],
-      achievements: [
-        "Reduced processing time by 60% through AI optimization",
-        "Led team of 5 developers on critical projects"
-      ]
-    },
-    {
-      id: 2,
-      title: "Full Stack Developer",
-      company: "InnovateLab",
-      location: "New York, NY",
-      duration: "2020 - 2022",
-      description: [
-        "Developed responsive web applications with modern JavaScript frameworks",
-        "Integrated third-party APIs and payment processing systems",
-        "Collaborated with UX/UI designers to implement pixel-perfect designs"
-      ],
-      technologies: ["Vue.js", "Express.js", "MongoDB", "AWS", "TypeScript"],
-      achievements: [
-        "Delivered 15+ projects on time and under budget",
-        "Improved application performance by 40%"
-      ]
-    },
-    {
-      id: 3,
-      title: "Frontend Developer",
-      company: "StartupXYZ",
-      location: "Austin, TX",
-      duration: "2018 - 2020",
-      description: [
-        "Built interactive user interfaces using React and modern CSS",
-        "Implemented responsive designs for mobile and desktop platforms",
-        "Collaborated with backend developers to integrate RESTful APIs"
-      ],
-      technologies: ["React", "JavaScript", "SCSS", "Redux", "Git"],
-      achievements: [
-        "Increased user engagement by 35%",
-        "Mentored 3 junior developers"
-      ]
-    }
-  ];
+   useEffect(() => {
+      if (!canvasRef.current) return;
+  
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
+      
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000000, 0);
+  
+      // Create floating particles
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 100;
+      const posArray = new Float32Array(particlesCount * 3);
+  
+      for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 10;
+      }
+  
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+  
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.005,
+        color: '#8b5cf6',
+        transparent: true,
+        opacity: 0.8
+      });
+  
+      const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particlesMesh);
+  
+      // Create geometric shapes
+      const shapes = [];
+      for (let i = 0; i < 5; i++) {
+        const geometry = new THREE.OctahedronGeometry(0.1, 0);
+        const material = new THREE.MeshBasicMaterial({
+          color: new THREE.Color().setHSL(0.6 + i * 0.1, 0.8, 0.6),
+          wireframe: true,
+          transparent: true,
+          opacity: 0.3
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(
+          (Math.random() - 0.5) * 8,
+          (Math.random() - 0.5) * 8,
+          (Math.random() - 0.5) * 8
+        );
+        shapes.push(mesh);
+        scene.add(mesh);
+      }
+  
+      camera.position.z = 5;
+      sceneRef.current = { scene, camera, renderer, particlesMesh, shapes };
+  
+      const animate = () => {
+        requestAnimationFrame(animate);
+  
+        // Rotate particles
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.0005;
+  
+        // Animate shapes
+        shapes.forEach((shape, index) => {
+          shape.rotation.x += 0.01 + index * 0.001;
+          shape.rotation.y += 0.01 + index * 0.001;
+          shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.001;
+        });
+  
+        renderer.render(scene, camera);
+      };
+  
+      animate();
+  
+      const handleResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        renderer.dispose();
+      };
+    }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -93,7 +119,12 @@ const WorkExperience: React.FC = () => {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-purple-900 py-20 px-4 relative overflow-hidden">
-     
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
+      
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 border border-purple-500 rotate-45"></div>
         <div className="absolute bottom-40 right-20 w-24 h-24 border border-cyan-400 rotate-12"></div>
@@ -173,19 +204,7 @@ const WorkExperience: React.FC = () => {
                     </div>
 
                     
-                    {exp.achievements && (
-                      <div className="mb-4">
-                        <h4 className="text-purple-300 font-semibold mb-2 text-sm">Key Achievements:</h4>
-                        {exp.achievements.map((achievement, i) => (
-                          <p key={i} className="text-cyan-300 text-sm mb-1">
-                            ★ {achievement}
-                          </p>
-                        ))}
-                      </div>
-                    )}
-
-                    
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {exp.technologies.map((tech, i) => (
                         <span
                           key={i}
@@ -195,6 +214,23 @@ const WorkExperience: React.FC = () => {
                         </span>
                       ))}
                     </div>
+
+                    {/* Certificate Display */}
+                    {exp.certificate && (
+                      <div className="mt-4 pt-4 border-t border-slate-700">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-purple-300 text-sm font-medium">Certificate</span>
+                        </div>
+                        <div className="bg-slate-700 rounded-lg p-3 border border-slate-600">
+                          <img 
+                            src={exp.certificate} 
+                            alt={`${exp.company} Certificate`}
+                            className="w-full h-auto max-h-48 object-contain rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                            onClick={() => window.open(exp.certificate, '_blank')}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

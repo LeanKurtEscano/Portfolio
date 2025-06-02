@@ -18,7 +18,7 @@ import postman from "../assets/postman.png";
 import puge from "../assets/puge.jpg";
 import python from "../assets/python.svg";
 import react from "../assets/react.png";
-import render from "../assets/render.svg";
+import render from "../assets/render.webp";
 import sql from "../assets/sql.svg";
 import tailwind from "../assets/tailwind.png";
 import typescript from "../assets/typescript.png";

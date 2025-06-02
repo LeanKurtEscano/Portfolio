@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
-import puge from '../assets/puge.jpg'; // Placeholder for your image, replace with actual path
+import puge from '../assets/puge.jpg'; 
+
+import { handleNavClick } from '../utils/nav';
 const Hero = () => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
@@ -208,7 +210,7 @@ const Hero = () => {
                   : 'opacity-0 translate-y-8'
               }`}
             >
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/25 hover:scale-105">
+              <button onClick={e => handleNavClick("projects",e)} className="group cursor-pointer relative px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/25 hover:scale-105">
                 <span className="relative z-10">View My Work</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-cyan-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>

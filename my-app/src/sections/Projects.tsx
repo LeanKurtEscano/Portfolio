@@ -2,74 +2,9 @@ import React from 'react';
 import * as THREE from 'three';
 import { ExternalLink, Github } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-
+import { projectsData } from '../constants';
 // Mock project data for demonstration
-const projectsData = [
-  {
-    id: 1,
-    name: "AI-Powered Chat Platform",
-    shortDescription: "A real-time chat application with intelligent message suggestions and sentiment analysis powered by machine learning algorithms.",
-    category: "Full Stack",
-    completionDate: "2024",
-    featured: true,
-    technologies: [
-      { name: "React", icon: "⚛️" },
-      { name: "Node.js", icon: "🟢" },
-      { name: "WebSocket", icon: "🔌" },
-      { name: "TensorFlow", icon: "🧠" }
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
-  },
-  {
-    id: 2,
-    name: "Smart E-commerce Dashboard",
-    shortDescription: "An analytics dashboard for e-commerce businesses with predictive insights, inventory management, and automated reporting features.",
-    category: "Dashboard",
-    completionDate: "2024",
-    featured: false,
-    technologies: [
-      { name: "Vue.js", icon: "💚" },
-      { name: "Python", icon: "🐍" },
-      { name: "Chart.js", icon: "📊" },
-      { name: "PostgreSQL", icon: "🐘" }
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
-  },
-  {
-    id: 3,
-    name: "Blockchain Voting System",
-    shortDescription: "A secure and transparent voting platform built on blockchain technology with smart contracts and real-time result verification.",
-    category: "Blockchain",
-    completionDate: "2023",
-    featured: true,
-    technologies: [
-      { name: "Solidity", icon: "⛓️" },
-      { name: "Web3.js", icon: "🌐" },
-      { name: "React", icon: "⚛️" },
-      { name: "Ethereum", icon: "💎" }
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
-  },
-  {
-    id: 4,
-    name: "Neural Network Visualizer",
-    shortDescription: "An interactive tool for visualizing and understanding neural network architectures with real-time training progress and layer analysis.",
-    category: "AI/ML",
-    completionDate: "2023",
-    featured: false,
-    technologies: [
-      { name: "Three.js", icon: "🎮" },
-      { name: "D3.js", icon: "📈" },
-      { name: "Python", icon: "🐍" },
-      { name: "FastAPI", icon: "⚡" }
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
-  }
-];
+
 
 const Projects: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -77,7 +12,26 @@ const Projects: React.FC = () => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const [isInView, setIsInView] = useState(false);
+ 
 
+   const handleNavClick = (item, e) => {
+    e.preventDefault();
+    const sectionId = item.toLowerCase();
+    const element = document.getElementById(sectionId);
+    
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+  
+  };
   const handleProjectClick = (projectId: number) => {
     console.log(`Navigate to project ${projectId}`);
   };
@@ -97,7 +51,7 @@ const Projects: React.FC = () => {
     renderer.domElement.style.left = '0';
     renderer.domElement.style.zIndex = '1';
     renderer.domElement.style.pointerEvents = 'none';
-    
+
     mountRef.current.appendChild(renderer.domElement);
 
     // Create floating geometries with better positioning
@@ -159,7 +113,7 @@ const Projects: React.FC = () => {
       const z = (Math.random() - 0.5) * 15;
 
       mesh.position.set(x, y, z);
-      
+
       // Store initial position for floating animation
       initialPositions.push(mesh.position.clone());
 
@@ -238,15 +192,15 @@ const Projects: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
-      
+
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current);
       }
-      
+
       if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
       }
-      
+
       // Cleanup Three.js resources
       meshes.forEach(mesh => {
         if (mesh.geometry) mesh.geometry.dispose();
@@ -258,7 +212,7 @@ const Projects: React.FC = () => {
           }
         }
       });
-      
+
       renderer.dispose();
       sceneRef.current = null;
       rendererRef.current = null;
@@ -275,12 +229,12 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="min-h-screen  bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 py-20 px-6 relative overflow-hidden">
       <div ref={mountRef} className="absolute inset-0 z-0" />
-      
+
       {/* Enhanced background gradients */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl opacity-15 animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-emerald-500 rounded-full filter blur-3xl opacity-10 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-emerald-500 rounded-full filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -304,28 +258,24 @@ const Projects: React.FC = () => {
           {projectsData.map((project, index) => (
             <div
               key={project.id}
-              className="group relative bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/50 overflow-hidden hover:border-purple-500/50 transition-all duration-500 cursor-pointer transform hover:scale-[1.02] hover:bg-gray-800/50"
+              className="group relative bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/50 overflow-hidden hover:border-purple-500/50 transition-all duration-500 cursor-pointer transform hover:scale-[1.02] hover:bg-gray-800/50 flex flex-col"
               onClick={() => handleProjectClick(project.id)}
               style={{
                 animationDelay: `${index * 0.2}s`
               }}
             >
               {/* Project Image/Preview */}
-              <div className="relative h-64 bg-gradient-to-br from-purple-900/20 to-cyan-900/20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-cyan-600/10"></div>
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm border border-purple-500/20">
+              <div className="relative h-64 overflow-hidden">
+                <img
+                  src={project.img}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-cyan-600/20"></div>
+                  <div className="absolute top-4 right-4 z-10">
+                  <span className="bg-cyan-900/80 text-cyan-200 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm border border-cyan-600/50">
                     {project.category}
                   </span>
-                </div>
-                
-                {/* Enhanced project preview */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-6xl opacity-30 group-hover:opacity-50 transition-opacity duration-300 group-hover:scale-110 transform transition-transform">
-                    {project.category === 'Full Stack' ? '🚀' : 
-                     project.category === 'Dashboard' ? '📊' : 
-                     project.category === 'Blockchain' ? '⛓️' : '🧠'}
-                  </div>
                 </div>
 
                 {/* Hover overlay */}
@@ -354,7 +304,7 @@ const Projects: React.FC = () => {
               </div>
 
               {/* Project Content */}
-              <div className="p-8">
+              <div className="p-8 flex flex-col flex-grow">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">
                     {project.name}
@@ -367,7 +317,7 @@ const Projects: React.FC = () => {
                 </p>
 
                 {/* Technologies */}
-                <div className="mb-6">
+                <div className="mb-6 flex-grow">
                   <h4 className="text-sm font-semibold text-gray-300 mb-3">Technologies Used</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
@@ -375,15 +325,19 @@ const Projects: React.FC = () => {
                         key={techIndex}
                         className="flex items-center space-x-2 bg-gray-700/50 px-3 py-2 rounded-lg border border-gray-600/50 hover:border-gray-500/50 transition-colors duration-300"
                       >
-                        <span className="text-lg">{tech.icon}</span>
+                        <img 
+                          src={tech.icon} 
+                          alt={tech.name}
+                          className="w-5 h-5 object-contain"
+                        />
                         <span className="text-sm text-gray-300 font-medium">{tech.name}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* View Details Button */}
-                <div className="flex items-center justify-between">
+                {/* View Details Button - Now always at bottom */}
+                <div className="flex items-center justify-between mt-auto">
                   <button className="text-purple-400 hover:text-purple-300 font-medium flex items-center space-x-2 group-hover:translate-x-2 transition-all duration-300">
                     <span>View Details</span>
                     <ExternalLink size={16} />
@@ -409,7 +363,7 @@ const Projects: React.FC = () => {
           <p className="text-gray-400 mb-6">
             Want to see more projects or discuss a collaboration?
           </p>
-          <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-purple-500/20">
+          <button onClick={e => handleNavClick("contact",e)}className="bg-gradient-to-r cursor-pointer from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-purple-500/20">
             Get In Touch
           </button>
         </div>
