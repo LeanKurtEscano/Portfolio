@@ -22,7 +22,7 @@ export const projectsData = [
   {
     id: 1,
     name: "QualitySense",
-    shortDescription: "A real-time chat application with intelligent message suggestions and sentiment analysis powered by machine learning algorithms.",
+    shortDescription: "QualitySense is a data quality checker assistant designed to help users identify missing values, outliers, categorical errors, and potential misspellings in their datasets. Powered by AI, the app not only detects these issues but also generates a Data Quality Summary Report that includes actionable suggestions. ",
     category: "Full Stack",
     completionDate: "2024",
     img: quality,
@@ -41,7 +41,7 @@ export const projectsData = [
   {
     id: 2,
     name: "Commision Accounting System",
-    shortDescription: "An analytics dashboard for e-commerce businesses with predictive insights, inventory management, and automated reporting features.",
+    shortDescription: "A full-stack web application built in collaboration with a real estate company to automate and streamline commission tracking for agents. The system dynamically calculates and distributes commissions based on agent hierarchies and custom rules, enhancing transparency and operational efficiency.",
     category: "Full Stack",
     img: accounting,
     completionDate: "2024",
@@ -58,7 +58,7 @@ export const projectsData = [
   {
     id: 3,
     name: "Tuloan - Loan Management System",
-    shortDescription: "A secure and transparent voting platform built on blockchain technology with smart contracts and real-time result verification.",
+    shortDescription: "Tu-Loan is a full-stack Loan Management System built to simplify and automate loan application, approval, and payment processes for both users and administrators. It offers real-time interaction, secure authentication, and a user-friendly interface. Developed as our final project during the second year of our BSIT-SD program, the system features automated interest and penalty calculations, real-time notifications using WebSockets, and a complete admin dashboard for managing users, loans, and disbursements.",
     category: "Full Stack",
     img: tuloan,
     completionDate: "2023",
@@ -75,7 +75,7 @@ export const projectsData = [
   {
     id: 4,
     name: "Docubot",
-    shortDescription: "An interactive tool for visualizing and understanding neural network architectures with real-time training progress and layer analysis.",
+    shortDescription: "A full-stack web application that allows users to upload PDF documents and engage in natural language conversations with their content. It processes the uploaded file, chunks the text, generates embeddings, stores them in a vector database, and uses a Retrieval-Augmented Generation (RAG) pipeline to fetch and generate accurate answers. ",
     category: "Full Stack + AI Integration",
     img: docubot,
     completionDate: "2023",

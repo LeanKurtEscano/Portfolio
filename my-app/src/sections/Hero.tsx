@@ -196,9 +196,10 @@ const Hero = () => {
                     : 'opacity-0 translate-y-6'
                 }`}
               >
-                Building intelligent web applications with{' '}
-                <span className="text-purple-400 font-semibold">RAG</span>,{' '}
-                <span className="text-cyan-400 font-semibold">LangChain</span>, and modern web technologies
+Building intelligent web applications with{' '}
+                <span className="text-purple-400 font-semibold">AI</span>,<br></br>
+                 and modern
+                <span className="text-cyan-400 font-semibold">  Web technologies</span>.
               </p>
             </div>
 

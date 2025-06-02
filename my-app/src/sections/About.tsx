@@ -20,8 +20,8 @@ const About = () => {
     },
     {
       icon: Database,
-      title: "Data Engineering",
-      description: "Designing scalable data pipelines for AI applications"
+      title: "Database Management",
+      description: "Optimizing and managing structured data for data-driven applications"
     },
     {
       icon: Zap,
@@ -220,18 +220,7 @@ const About = () => {
                 className="overflow-hidden"
               >
                 I'm a passionate full-stack developer specializing in bridging traditional web development 
-                and cutting-edge AI technologies. With expertise in 
-
-                <motion.span 
-                  className="text-purple-400 p-1 font-semibold"
-                  whileHover={{ scale: 1.1, color: "#c084fc" }}
-                  transition={{ duration: 0.2 }}
-                > RAG </motion.span> and 
-                <motion.span 
-                  className="text-cyan-400 p-1 font-semibold"
-                  whileHover={{ scale: 1.1, color: "#67e8f9" }}
-                  transition={{ duration: 0.2 }}
-                > LangChain</motion.span>, I create intelligent 
+                and cutting-edge AI technologies. I create intelligent 
                 applications that understand and interact meaningfully.
               </motion.p>
               
@@ -240,9 +229,7 @@ const About = () => {
                 custom={3}
                 className="overflow-hidden"
               >
-                My journey began with traditional web development, but I quickly became fascinated 
-                by AI integration potential. Today, I build applications that leverage artificial 
-                intelligence for personalized, context-aware experiences.
+              My journey began with traditional web development, but I quickly became fascinated by the potential of AI integration. With a strong focus on backend development, I have developed a keen interest in Retrieval-Augmented Generation (RAG) and autonomous agents, exploring how these technologies can transform traditional applications into smart, context-aware systems.
               </motion.p>
 
               <motion.p 
@@ -250,9 +237,9 @@ const About = () => {
                 custom={4}
                 className="overflow-hidden"
               >
-                Whether implementing semantic search, building chatbots with retrieval capabilities, 
-                or creating ML data pipelines, I love solving complex problems at the intersection 
-                of web development and AI.
+               Whether building efficient web applications, integrating AI-powered retrieval agents, or creating intelligent automation workflows, I enjoy solving complex challenges that combine backend development and AI.
+
+
               </motion.p>
             </motion.div>
 

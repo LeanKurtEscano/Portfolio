@@ -2,7 +2,9 @@ import React from 'react';
 import * as THREE from 'three';
 import { ExternalLink, Github } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { projectsData } from '../constants';
+import { projectsData } from '../constants'; 
+
+import useParticles from '../hooks/useParticles';
 // Mock project data for demonstration
 
 
@@ -12,7 +14,7 @@ const Projects: React.FC = () => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const [isInView, setIsInView] = useState(false);
- 
+  const canvasRef = useParticles();
 
    const handleNavClick = (item, e) => {
     e.preventDefault();
@@ -229,7 +231,11 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="min-h-screen  bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 py-20 px-6 relative overflow-hidden">
       <div ref={mountRef} className="absolute inset-0 z-0" />
-
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
       {/* Enhanced background gradients */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
