@@ -5,7 +5,7 @@ import huggingface from "../assets/huggingface.png";
 import langchain from "../assets/langchain.png";
 import next from "../assets/next.png";
 import ollama from "../assets/ollama.webp";
-import postgres from "../assets/postgres.webp";
+import postgres from "../assets/postgres.png";
 import react from "../assets/react.png";
 import tailwind from "../assets/tailwind.png";
 import typescript from "../assets/typescript.png";

@@ -6,7 +6,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Throttled scroll handler for better performance
   const handleScroll = useCallback(() => {
     const scrollY = window.scrollY;
     setScrolled(scrollY > 20);
@@ -15,7 +14,7 @@ const Navbar = () => {
   useEffect(() => {
     setIsMounted(true);
     
-    // Throttle scroll events for performance
+
     let timeoutId = null;
     const throttledScroll = () => {
       if (timeoutId === null) {
@@ -33,7 +32,7 @@ const Navbar = () => {
     };
   }, [handleScroll]);
 
-  // Close mobile menu on resize to desktop
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isOpen) {
@@ -45,7 +44,6 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [isOpen]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -63,19 +61,65 @@ const Navbar = () => {
   const handleNavClick = (item, e) => {
     e.preventDefault();
     const sectionId = item.toLowerCase();
-    const element = document.getElementById(sectionId);
     
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    // Check if we're on the home page (/ or any path that doesn't contain /project/ or other routes)
+    const currentPath = window.location.pathname;
+    const isHomePage = currentPath === '/' || currentPath === '';
+    
+    if (isHomePage) {
+    
+      const element = document.getElementById(sectionId);
+      
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      // If on different route (like /project/:id), navigate to home page first
+      // Store the section we want to scroll to
+      sessionStorage.setItem('scrollToSection', sectionId);
+      
+    
+      window.location.href = '/';
     }
     
+    setIsOpen(false);
+  };
+
+  // Check if we need to scroll to a section after page load (for navigation from other routes)
+  useEffect(() => {
+    const sectionToScroll = sessionStorage.getItem('scrollToSection');
+    if (sectionToScroll && window.location.pathname === '/') {
+      // Wait a bit for the page to fully load
+      setTimeout(() => {
+        const element = document.getElementById(sectionToScroll);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+        sessionStorage.removeItem('scrollToSection');
+      }, 500);
+    }
+  }, []);
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    // Clear any pending section scroll
+    sessionStorage.removeItem('scrollToSection');
+    // Navigate to home page
+    window.location.href = '/';
     setIsOpen(false);
   };
 
@@ -111,14 +155,14 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           <div className="flex justify-between items-center h-14 sm:h-16 lg:h-18">
             
-            {/* Logo - Responsive sizing and positioning */}
-            <div className="flex-shrink-0 z-10">
-              <div className="relative group cursor-pointer">
-                <div className="text-lg  sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105">
-                  <span className="font-mono tracking-tight">{"<Lean />"}</span>
+            {/* Logo - Adjusted alignment to match hero section "H" */}
+            <div className="flex-shrink-0 z-10 ml-2 sm:ml-4 lg:ml-8 xl:ml-12">
+              <a href="/" onClick={handleLogoClick} className="relative group cursor-pointer">
+                <div className="text-lg md:pl-20 sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105">
+                  <span className="font-mono tracking-tight">{"<Lean/>"}</span>
                 </div>
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100 rounded-full"></div>
-              </div>
+              </a>
             </div>
 
             {/* Desktop Navigation - Positioned towards the right */}
@@ -127,7 +171,7 @@ const Navbar = () => {
                 {navItems.map((item, index) => (
                   <a
                     key={item}
-                    href={`#${item.toLowerCase()}`}
+                    href={`/#${item.toLowerCase()}`}
                     onClick={(e) => handleNavClick(item, e)}
                     className="relative group px-2 lg:px-4 py-2 text-sm lg:text-base xl:text-lg text-gray-300 hover:text-white transition-all duration-300 font-medium rounded-lg"
                   >
@@ -176,7 +220,7 @@ const Navbar = () => {
             {navItems.map((item, index) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={`/#${item.toLowerCase()}`}
                 onClick={(e) => handleNavClick(item, e)}
                 className={`block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-purple-600/30 hover:to-cyan-600/30 rounded-xl transition-all duration-300 transform hover:translate-x-2 hover:scale-105 ${
                   isOpen ? `animate-fade-in-up` : ''
@@ -192,9 +236,6 @@ const Navbar = () => {
                 </div>
               </a>
             ))}
-            
-            {/* Mobile CTA - Removed */}
-            
           </div>
         </div>
       </nav>

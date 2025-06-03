@@ -34,6 +34,21 @@ const ProjectDetails: React.FC = () => {
     }, 100);
   };
 
+
+    const handleContact = () => {
+    navigate('/');
+    // Use setTimeout to ensure navigation completes before scrolling
+    setTimeout(() => {
+      const projectsSection = document.getElementById('contact');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -101,7 +116,7 @@ const ProjectDetails: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mb-4">Project Not Found</h2>
           <motion.button 
             onClick={() => navigate('/')}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
+            className="bg-purple-600 cursor-pointer hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -477,7 +492,8 @@ const ProjectDetails: React.FC = () => {
                 Let's discuss how I can help bring your ideas to life with cutting-edge technology.
               </p>
               <motion.button 
-                className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white py-3 rounded-lg font-semibold transition-all duration-300"
+              onClick={handleContact}
+                className="w-full cursor-pointer bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white py-3 rounded-lg font-semibold transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
