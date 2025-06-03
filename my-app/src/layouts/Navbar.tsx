@@ -137,7 +137,7 @@ const Navbar = () => {
       {/* Backdrop overlay for mobile menu */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
@@ -146,9 +146,13 @@ const Navbar = () => {
       <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${
           scrolled 
-            ? 'bg-black/95 backdrop-blur-xl border-b border-purple-500/30 shadow-2xl shadow-purple-500/10' 
+            ? 'bg-black/20 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/5' 
             : 'bg-transparent'
         }`}
+        style={{
+          backdropFilter: scrolled ? 'blur(12px) saturate(150%)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(12px) saturate(150%)' : 'none',
+        }}
         role="navigation"
         aria-label="Main navigation"
       >
@@ -158,7 +162,7 @@ const Navbar = () => {
             {/* Logo - Adjusted alignment to match hero section "H" */}
             <div className="flex-shrink-0 z-10 ml-2 sm:ml-4 lg:ml-8 xl:ml-12">
               <a href="/" onClick={handleLogoClick} className="relative group cursor-pointer">
-                <div className="text-lg md:pl-20 sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105">
+                <div className="text-lg md:pl-20 sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105 drop-shadow-lg">
                   <span className="font-mono tracking-tight">{"<Lean/>"}</span>
                 </div>
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100 rounded-full"></div>
@@ -173,10 +177,13 @@ const Navbar = () => {
                     key={item}
                     href={`/#${item.toLowerCase()}`}
                     onClick={(e) => handleNavClick(item, e)}
-                    className="relative group px-2 lg:px-4 py-2 text-sm lg:text-base xl:text-lg text-gray-300 hover:text-white transition-all duration-300 font-medium rounded-lg"
+                    className="relative group px-2 lg:px-4 py-2 text-sm lg:text-base xl:text-lg text-white/90 hover:text-white transition-all duration-300 font-medium"
+                    style={{
+                      textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                    }}
                   >
                     <span className="relative z-10 tracking-wide">{item}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/20 to-cyan-600/0 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"></div>
+
                     <div className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:w-3/4 group-hover:left-1/8 transition-all duration-300 rounded-full"></div>
                   </a>
                 ))}
@@ -187,7 +194,10 @@ const Navbar = () => {
             <div className="md:hidden">
               <button
                 onClick={toggleMenu}
-                className="relative inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-purple-600/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                className="relative inline-flex items-center justify-center p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
+                style={{
+                  textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                }}
                 aria-expanded={isOpen}
                 aria-label="Toggle navigation menu"
               >
@@ -214,7 +224,7 @@ const Navbar = () => {
             isOpen 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 -translate-y-4 pointer-events-none'
-          } bg-black/98 backdrop-blur-xl border-b border-purple-500/30`}
+          } bg-black/80 backdrop-blur-xl border-b border-white/20`}
         >
           <div className="px-4 py-6 space-y-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
             {navItems.map((item, index) => (
@@ -222,12 +232,13 @@ const Navbar = () => {
                 key={item}
                 href={`/#${item.toLowerCase()}`}
                 onClick={(e) => handleNavClick(item, e)}
-                className={`block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-purple-600/30 hover:to-cyan-600/30 rounded-xl transition-all duration-300 transform hover:translate-x-2 hover:scale-105 ${
+                className={`block px-4 py-4 text-lg font-medium text-white/90 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:scale-105 ${
                   isOpen ? `animate-fade-in-up` : ''
                 }`}
                 style={{
                   animationDelay: `${index * 100}ms`,
-                  animationFillMode: 'both'
+                  animationFillMode: 'both',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.5)',
                 }}
               >
                 <div className="flex items-center justify-between">
@@ -268,7 +279,7 @@ const Navbar = () => {
         }
         
         .max-h-\\[calc\\(100vh-4rem\\)\\]::-webkit-scrollbar-track {
-          background: rgba(139, 92, 246, 0.1);
+          background: rgba(255, 255, 255, 0.1);
         }
         
         .max-h-\\[calc\\(100vh-4rem\\)\\]::-webkit-scrollbar-thumb {
