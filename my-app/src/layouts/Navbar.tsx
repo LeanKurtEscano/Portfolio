@@ -165,7 +165,7 @@ const Navbar = () => {
                 <div className="text-lg md:pl-20 sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105 drop-shadow-lg">
                   <span className="font-mono tracking-tight">{"<Lean/>"}</span>
                 </div>
-                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100 rounded-full"></div>
+                <div className="absolute md:pl-20W -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100 rounded-full"></div>
               </a>
             </div>
 
@@ -183,7 +183,6 @@ const Navbar = () => {
                     }}
                   >
                     <span className="relative z-10 tracking-wide">{item}</span>
-
                     <div className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:w-3/4 group-hover:left-1/8 transition-all duration-300 rounded-full"></div>
                   </a>
                 ))}

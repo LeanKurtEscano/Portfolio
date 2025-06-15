@@ -35,7 +35,7 @@ export const projectsData = [
       { name: "Postgres", icon: postgres },
       { name: "Pandas", icon: pandas },
     ],
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/LeanKurtEscano/QualitySense",
     liveUrl: "https://example.com"
   },
   {
@@ -69,7 +69,7 @@ export const projectsData = [
       { name: "Django", icon: django },
       { name: "Postgres", icon: postgres }
     ],
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/LeanKurtEscano/Loan-Management-System",
     liveUrl: "https://example.com"
   },
   {
@@ -89,7 +89,7 @@ export const projectsData = [
      { name: "Ollama", icon: ollama },
       { name: "HuggingFace", icon: huggingface },
     ],
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/LeanKurtEscano/Document-Q-A-Assistant",
     liveUrl: "https://example.com"
   }
 ];
