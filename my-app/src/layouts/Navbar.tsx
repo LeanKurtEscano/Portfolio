@@ -160,12 +160,12 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-14 sm:h-16 lg:h-18">
             
             {/* Logo - Adjusted alignment to match hero section "H" */}
-            <div className="flex-shrink-0 z-10 ml-2 sm:ml-4 lg:ml-8 xl:ml-12">
+            <div className="flex-shrink-0 md:pl-20 z-10 ml-2 sm:ml-4 lg:ml-8 xl:ml-12">
               <a href="/" onClick={handleLogoClick} className="relative group cursor-pointer">
-                <div className="text-lg md:pl-20 sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105 drop-shadow-lg">
+                <div className="text-lg  sm:text-xl lg:text-2xl xl:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105 drop-shadow-lg">
                   <span className="font-mono tracking-tight">{"<Lean/>"}</span>
                 </div>
-                <div className="absolute md:pl-20W -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100 rounded-full"></div>
+                <div className="absolute  -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100 rounded-full"></div>
               </a>
             </div>
 
