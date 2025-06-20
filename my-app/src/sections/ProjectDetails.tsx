@@ -196,11 +196,15 @@ const ProjectDetails: React.FC = () => {
               </motion.p>
 
               {/* Action Buttons */}
+
+             
               <motion.div 
                 className="flex flex-wrap gap-4"
                 variants={staggerContainer}
               >
-                <motion.a
+
+                 {project.liveUrl !== "https://example.com" && (
+                 <motion.a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -212,6 +216,8 @@ const ProjectDetails: React.FC = () => {
                   <ExternalLink size={20} />
                   <span>View Live Demo</span>
                 </motion.a>
+              )}
+               
                 <motion.a
                   href={project.githubUrl}
                   target="_blank"
@@ -225,6 +231,8 @@ const ProjectDetails: React.FC = () => {
                   <span>View Code</span>
                 </motion.a>
               </motion.div>
+
+
             </motion.div>
 
             {/* Project Image/Preview */}

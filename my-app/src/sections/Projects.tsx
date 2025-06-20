@@ -6,7 +6,7 @@ import { projectsData } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import useParticles from '../hooks/useParticles';
 // Mock project data for demonstration
-
+import { stopEvent } from '../utils/eventUtils';
 
 const Projects: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -37,6 +37,14 @@ const Projects: React.FC = () => {
   const handleProjectClick = (projectId: number) => {
     nav(`/project/${projectId}`);
   
+  };
+
+  // Fixed event handler for external links
+  const handleExternalLinkClick = (url: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation(); // This prevents the parent card click event
+    e.nativeEvent.stopImmediatePropagation(); // Additional stopping for React events
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -286,26 +294,28 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                  <div className="flex space-x-4">
-                    <button
-                      className="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(project.githubUrl, '_blank');
-                      }}
-                    >
-                      <Github size={20} />
-                    </button>
-                    <button
-                      className="bg-cyan-600 hover:bg-cyan-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(project.liveUrl, '_blank');
-                      }}
-                    >
-                      <ExternalLink size={20} />
-                    </button>
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm z-30">
+                  <div className="flex space-x-4" onClick={(e) => e.stopPropagation()}>
+                    {project.githubUrl && (
+                      <button
+                        onClick={(e) => handleExternalLinkClick(project.githubUrl, e)}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        className="bg-purple-600 cursor-pointer hover:bg-purple-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 relative z-40"
+                        type="button"
+                      >
+                        <Github size={20} />
+                      </button>
+                    )}
+                    {project.liveUrl && project.liveUrl !== "https://example.com" && (
+                      <button
+                        onClick={(e) => handleExternalLinkClick(project.liveUrl, e)}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        className="bg-cyan-600 cursor-pointer hover:bg-cyan-700 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 relative z-40"
+                        type="button"
+                      >
+                        <ExternalLink size={20} />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
