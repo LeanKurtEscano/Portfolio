@@ -528,54 +528,62 @@ const ProjectDetails: React.FC = () => {
           >
             Explore Other Projects
           </motion.h3>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {projectsData
-              .filter(p => p.id !== projectId)
-              .map((otherProject, index) => (
-                <motion.div
-                  key={otherProject.id}
-                  onClick={() => navigate(`/project/${otherProject.id}`)}
-                  className="bg-gray-700/30 rounded-xl p-6 cursor-pointer hover:bg-gray-700/50 transition-all duration-300 border border-gray-600/30 hover:border-purple-500/30"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  whileTap={{ scale: 0.98 }}
-                  custom={index}
-                >
-                  {otherProject.img && (
-                    <motion.img 
-                      src={otherProject.img} 
-                      alt={otherProject.name}
-                      className="w-full h-32 object-cover rounded-lg mb-4"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
-                  <h4 className="text-lg font-semibold text-white mb-2">
-                    {otherProject.name}
-                  </h4>
-                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-                    {otherProject.shortDescription.substring(0, 100)}...
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-purple-400 text-sm font-medium">
-                      {otherProject.category}
-                    </span>
-                    <motion.span 
-                      className="text-cyan-400 text-sm"
-                      whileHover={{ x: 5 }}
-                    >
-                      View Project →
-                      
-                    </motion.span>
-                  </div>
-                </motion.div>
-              ))}
-          </motion.div>
+       <motion.div              
+  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"             
+  variants={staggerContainer}             
+  initial="hidden"             
+  animate="visible"           
+>             
+  {projectsData               
+    .filter(p => p.id !== projectId)               
+    .map((otherProject, index) => (                 
+      <motion.div                   
+        key={otherProject.id}                   
+        onClick={() => navigate(`/project/${otherProject.id}`)}                   
+        className="bg-gray-700/30 rounded-xl p-6 cursor-pointer hover:bg-gray-700/50 transition-all duration-300 border border-gray-600/30 hover:border-purple-500/30 h-full flex flex-col"                   
+        variants={itemVariants}                   
+        whileHover={{ scale: 1.05, y: -5 }}                   
+        whileTap={{ scale: 0.98 }}                   
+        custom={index}                 
+      >                   
+        {otherProject.img && (                     
+          <motion.img                        
+            src={otherProject.img}                        
+            alt={otherProject.name}                       
+            className="w-full h-32 object-cover rounded-lg mb-4 flex-shrink-0"                       
+            whileHover={{ scale: 1.05 }}                       
+            transition={{ duration: 0.3 }}                     
+          />                   
+        )}                   
+        
+        <div className="flex flex-col flex-grow">
+          <h4 className="text-lg font-semibold text-white mb-2">                     
+            {otherProject.name}                   
+          </h4>                   
+          
+          <p className="text-gray-400 text-sm mb-3 flex-grow">                     
+            {otherProject.shortDescription.length > 100 
+              ? `${otherProject.shortDescription.substring(0, 100)}...`
+              : otherProject.shortDescription
+            }                   
+          </p>                   
+          
+          <div className="flex items-center justify-between mt-auto">                     
+            <span className="text-purple-400 text-sm font-medium">                       
+              {otherProject.category}                     
+            </span>                     
+            <motion.span                        
+              className="text-cyan-400 text-sm"                       
+              whileHover={{ x: 5 }}                     
+            >                       
+              View Project →                                            
+            </motion.span>                   
+          </div>
+        </div>                 
+      </motion.div>               
+    ))
+  }           
+</motion.div>
         </div>
       </motion.div>
     </motion.div>
