@@ -35,9 +35,10 @@ export const programmingLanguages = [
 
 export  const frameworksLibraries = [
     { name: 'React', image: react },
-    { name: 'Next.js', image: next },
+   
     { name: 'Tailwind CSS', image: tailwind },
     { name: 'Django', image: django },
+     { name: 'flask', image: django },
     { name: 'FastAPI', image: FastAPi },
     
   ];

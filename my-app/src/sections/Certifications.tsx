@@ -9,7 +9,7 @@ const Certifications = () => {
   const mountRef = useRef(null);
   const canvasRef = useParticles();
 
-  // Handle card click
+  
   const handleCardClick = (verifyUrl) => {
     window.open(verifyUrl, '_blank', 'noopener,noreferrer');
   };
