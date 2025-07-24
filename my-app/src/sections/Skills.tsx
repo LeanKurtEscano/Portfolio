@@ -189,15 +189,7 @@ const Skills = () => {
               {/* Category Header */}
               <div className="text-center">
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 backdrop-blur-sm">
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${category.bgColor}`}>
-                    <category.icon className={`w-6 h-6 text-transparent bg-gradient-to-r ${category.color} bg-clip-text`} style={{
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundImage: category.color.includes('purple') ? 'linear-gradient(to right, #a855f7, #ec4899)' :
-                        category.color.includes('cyan') ? 'linear-gradient(to right, #06b6d4, #3b82f6)' :
-                          'linear-gradient(to right, #10b981, #14b8a6)'
-                    }} />
-                  </div>
+                 
                   <h3 className="text-2xl font-bold text-white">{category.title}</h3>
                 </div>
               </div>
